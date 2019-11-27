@@ -1,0 +1,64 @@
+<div class="containerFilm">
+  <a href="javascript:history.go(-1)"
+onMouseOver="self.status=document.referrer;return true">
+Torna indietro</a>
+
+    <div class="box">
+      <div *ngIf="filmDet.poster_path; else templateNoImg">
+        <section class="image">
+          <img src="https://image.tmdb.org/t/p/w300{{filmDet.poster_path}}" alt="imagePoster">
+        </section>
+      </div>
+      <section class="title">
+        <h1><b>Nome Originale</b>: {{ filmDet.original_name || filmDet.original_title}}</h1>
+        <h3>{{ filmDet.name || filmDet.title }}</h3>
+        <h3><b>Data di uscita:</b> {{ (filmDet.release_date | date:'dd-MM-yyyy') || (filmDet.first_air_date | date:'dd-MM-yyyy') }}</h3>
+        <!-- controllo se il numero di episodi esiste -->
+        <div *ngIf="(filmDet.episode_run_time)">
+          <h3><b>Numero Episodi:</b> {{ filmDet.episode_run_time }} </h3>
+        </div>
+        <!-- faccio un foreach per prendere il paese di produzione -->
+        <div *ngFor="let film of filmDet['production_countries']">
+          <h3><b>Paese di Produzione:</b> {{ film.name }}</h3>
+        </div>
+        <div class="genere">
+          <h3><b>Genere:</b></h3>
+          <ul>
+          <div *ngFor="let film of filmDet['genres']">
+              <li><h4>{{ film.name }}</h4></li>
+          </div>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <!-- if per controllo presenza overview -->
+    <div *ngIf="filmDet.overview; else templateNoOver">
+      <section class="overview">
+        <h3>Trama</h3>
+        <p>{{ filmDet.overview }}</p>
+      </section>
+    </div>
+    <!-- if per controllo presenza immagine -->
+    <section class="imageBath">
+      <img *ngIf="filmDet.backdrop_path != null" src="https://image.tmdb.org/t/p/w300{{filmDet.backdrop_path}}" alt="">
+    </section>
+
+    <section class="homepage">
+      <a href="{{filmDet.homepage}}"><h2>VAI SUL SITO UFFICIALE DI {{ filmDet.original_name || filmDet.title }}</h2></a>
+    </section>
+
+</div>
+
+<!-- blocco alternativo per assenza overview -->
+<ng-template #templateNoOver>
+  <section class="overview">
+    <h3>Nessuna Trama Disponibile</h3>
+  </section>
+</ng-template>
+
+<!-- blocco alternativo per assenza immagine -->
+<ng-template #templateNoImg>
+  <section class="empty">
+    <h2>Nessun Immagine<br>Disponibile</h2>
+  </section>
+</ng-template>

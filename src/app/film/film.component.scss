@@ -1,0 +1,149 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+div.containerFilm {
+  width: 80%;
+  margin: 50px auto;
+
+  div.box {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+
+    section.image {
+      margin-right: 20px;
+
+      img {
+        max-width: 100%;
+      }
+    }
+
+    section.title {
+      margin: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      h1 {
+        font-size: 26pt;
+      }
+
+      h3 {
+        font-size: 20pt;
+        margin-top: 10px;
+      }
+
+      div.genere {
+
+        ul {
+          margin-top: 10px;
+          margin-left: 40px;
+
+          li {
+            font-size: 18pt;
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+  section.overview {
+    font-size: 18pt;
+    margin: 20px 0;
+  }
+
+  section.imageBath {
+    height: auto;
+    width: 30%;
+    margin: 40px auto;
+
+    img {
+      height: auto;
+      width: 100%;
+    }
+  }
+
+  section.homepage {
+    width: 100%;
+    text-align: center;
+
+    a {
+      color: blue;
+      text-decoration: none;
+    }
+  }
+}
+
+section.empty {
+  width: 300px;
+  height: 500px;
+  background-color: gray;
+  border-radius: 10px;
+  padding-top: 120px;
+
+  h2 {
+    text-align: center;
+    color: white;
+  }
+}
+
+// viewport 4800px
+  @media screen and (max-width: 480px) {
+
+    div.containerFilm {
+      width: 90%;
+
+      div.box {
+
+        section.image {
+          margin-right: 0;
+        }
+
+        section.title {
+
+          h1 {
+            font-size: 18pt;
+          }
+
+          h3 {
+            font-size: 14pt;
+          }
+
+          div.genere {
+
+            ul {
+
+              li {
+                font-size: 12pt;
+              }
+
+            }
+
+          }
+
+        }
+
+      }
+
+      section.overview {
+        font-size: 14pt;
+        text-align: justify;
+      }
+
+      section.imageBath {
+        width: 60%;
+      }
+
+      section.homepage {
+        width: 100%;
+        text-align: center;
+      }
+    }
+}

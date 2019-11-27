@@ -1,0 +1,59 @@
+
+  <form [formGroup]="filmSearch" class="search">
+    <label>
+      <input type="text" formControlName="query" required>
+    </label>
+    <label>
+      <select formControlName="type" required>
+        <option value="tv">Serie Tv</option>
+        <option value="movie">Movie</option>
+      </select>
+    </label>
+  </form>
+  <form [formGroup]="filmSearch" (ngSubmit)="onSubmit()">
+  <button type="submit" [disabled]="!filmSearch.valid">CERCA</button>
+
+  <div *ngIf="(films != undefined); else templateEmpty">
+    <div *ngIf="(films.length > 2); else templateName">
+        <div class="container film">
+          <div *ngFor="let film of films">
+            <!-- inserisco un tag a che invii tipo e id alla pagina film -->
+            <a [routerLink]="['/film' ,type.type ,film.id]" routerLinkActive="active">
+            <div class="cards">
+              <!-- if per controllare presenza immagine -->
+              <div *ngIf="film.poster_path; else templateNoImg">
+                <section class="image">
+                  <img src="https://image.tmdb.org/t/p/w300{{film.poster_path}}" alt="">
+                </section>
+              </div>
+              <section class="text">
+                <h2>{{film.title || film.name}}</h2>
+              </section>
+            </div>
+          </a>
+          </div>
+        </div>
+    </div>
+  </div>
+
+    <!-- blocco alternativo per nessun risultato ricerca utente -->
+    <ng-template #templateName>
+      <h2 class="arrayVuoto">Nessun Risultato Trovato per '{{query.query}}'</h2>
+    </ng-template>
+
+    <!-- blocco iniziale prima della ricerca utente -->
+    <ng-template #templateEmpty>
+      <div class="initialPage">
+        <div class="text">
+          <h2>Abbiamo i migliori Film e Serie Tv</h2>
+          <h2>Utilizza la barra di ricerca in alto e seleziona cosa preferisci tra Film o Serie Tv</h2>
+        </div>
+      </div>
+    </ng-template>
+
+    <!-- blocco alternativo per assenza immagine -->
+    <ng-template #templateNoImg>
+      <section class="empty">
+        <h2>Nessun Immagine<br>Disponibile</h2>
+      </section>
+    </ng-template>
